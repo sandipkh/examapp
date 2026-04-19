@@ -1,0 +1,39 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+.expo/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+pgdata/
+redisdata/
+
+# Logs
+*.log
+
+# DO NOT ignore uv.lock — it must be committed
+# !backend/uv.lock

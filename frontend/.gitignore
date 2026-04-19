@@ -1,0 +1,13 @@
+# Firebase and API keys — never commit
+.env
+.env.local
+.env.production
+
+# Expo generated files
+.expo/
+dist/
+web-build/
+node_modules/
+
+# OS
+.DS_Store

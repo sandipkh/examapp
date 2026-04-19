@@ -1,0 +1,46 @@
+# UPSC IAS Prep — Project Conventions
+
+## Stack
+- Frontend: Expo 51 + React Native + TypeScript (TSX) + NativeWind v4
+- Backend: FastAPI + Python 3.11 + SQLAlchemy 2.0 async + Alembic
+- DB: PostgreSQL 16 + Redis 7
+- Auth: Firebase (Google OAuth for happy path, phone OTP + Facebook later)
+- Payments: Razorpay subscriptions (full project phase)
+- Deploy: Docker + Nginx + DigitalOcean
+
+## Build Phases
+- Day 1: Backend only (Steps 1-13). Goal: all APIs working at localhost:8000/docs
+- Day 2: Frontend happy path (Steps 14-19). Goal: Google login → question → history
+- Full Project: Admin panel UI, payments, phone OTP, deployment (Steps 20-22)
+
+## Package Management — CRITICAL
+- Python uses uv only. NEVER pip install.
+- No requirements.txt. Use pyproject.toml + uv.lock.
+- uv sync → installs from lockfile locally
+- uv add packagename → adds new package
+- uv run <command> → runs any Python command
+- Docker uses: uv sync --frozen
+- uv.lock must be committed to git, never in .gitignore
+
+## Critical Backend Rules
+1. Never return correct_option from GET /questions/next
+   Only return it in POST /attempts/submit response
+2. Option shuffling: frontend only, Fisher-Yates + useMemo([question.id])
+   Backend always stores/returns original A/B/C/D keys
+3. JWT: access token 15min, refresh token 30 days
+   Frontend silently refreshes via axios interceptor on 401
+4. All DB calls must be async (SQLAlchemy async session)
+5. topic_performance uses PostgreSQL ON CONFLICT DO UPDATE upsert
+6. Adaptive selection excludes questions attempted in last 7 days
+7. Free plan: 5 questions/day in users.daily_questions_used
+8. Admin auth: separate admin_users table, bcrypt passwords
+9. Razorpay webhook: no JWT, verify X-Razorpay-Signature only
+10. Always TSX not JSX. Always async/await not .then()
+
+## Folder Locations
+- Backend routers: backend/app/routers/
+- Backend models: backend/app/models/models.py
+- Backend schemas: backend/app/schemas/schemas.py
+- Frontend screens: frontend/app/
+- Frontend components: frontend/components/
+- Admin panel: admin/src/

@@ -1,0 +1,10 @@
+# Firebase and API keys — never commit
+.env  
+
+# python virtual environment
+.venv/       
+__pycache__/
+
+.venv/
+__pycache__/
+*.pyc
