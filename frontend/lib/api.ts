@@ -1,8 +1,17 @@
 import axios from "axios";
+import { Platform } from "react-native";
 import { useAuthStore } from "../store/authStore";
 
+// On web, use the page's origin so HTTPS pages don't issue mixed-content
+// requests and the same bundle works on any domain. On native, fall back to
+// the build-time env var or localhost.
+const webBaseURL = Platform.OS === "web" && typeof window !== "undefined"
+  ? window.location.origin
+  : "";
+const nativeBaseURL = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:8000";
+
 const api = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:8000",
+  baseURL: Platform.OS === "web" ? webBaseURL : nativeBaseURL,
 });
 
 api.interceptors.request.use((config) => {

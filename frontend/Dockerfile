@@ -3,7 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npx expo export --platform web
+RUN npx expo export --platform web \
+    && sed -i 's|<script src="/_expo/|<script type="module" src="/_expo/|g' dist/index.html
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80

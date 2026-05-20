@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
 import Constants from "expo-constants";
@@ -10,6 +11,7 @@ import {
 import {
   getAuth,
   signInWithPhoneNumber,
+  signInWithPopup,
   PhoneAuthProvider,
   GoogleAuthProvider,
   signInWithCredential,
@@ -93,6 +95,12 @@ function buildGoogleAuthUrl(): string {
 }
 
 export async function signInWithGoogle(): Promise<string> {
+  if (Platform.OS === "web") {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    return await result.user.getIdToken();
+  }
+
   const authUrl = buildGoogleAuthUrl();
 
   // The Expo auth proxy flow:

@@ -42,7 +42,13 @@
       "Bash(do npx:*)",
       "Bash(npx vite:*)",
       "Bash(python:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(docker restart *)",
+      "Bash(sudo ss -tlnp)",
+      "Bash(sudo -n ss -tlnp)",
+      "Bash(sudo -n lsof -iTCP:80 -sTCP:LISTEN)",
+      "Bash(sudo -n fuser 80/tcp)",
+      "Bash(systemctl list-units *)"
     ]
   }
 }

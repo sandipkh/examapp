@@ -1,0 +1,22 @@
+{
+  "project": "UPSC IAS Prep App",
+  "description": "Full-stack UPSC exam preparation platform — React Native mobile app, FastAPI backend, React admin panel",
+  "defaultAgent": "fullstack-engineer",
+  "permissions": {
+    "allow": [
+      "Bash(uv:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(git:*)",
+      "Bash(docker:*)",
+      "Bash(docker compose:*)",
+      "Read(**)",
+      "Write(**)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(pip install *)",
+      "Bash(curl * | bash)"
+    ]
+  }
+}
