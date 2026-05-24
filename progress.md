@@ -100,3 +100,5 @@ The dev api shares the docker network with the prod containers and reaches postg
 - Wire `.claude/hooks/pre-commit.sh` into actual git pre-commit (currently just sits in `.claude/hooks/`). Either symlink to `.git/hooks/pre-commit` or set up `husky`/`pre-commit` framework.
 - Rebuild the prod api image once the test files are stable, so prod runs include them.
 - Confirm pegatutorial OAuth fix worked.
+
+-test github checkin
